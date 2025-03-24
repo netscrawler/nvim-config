@@ -20,23 +20,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 
--- lspsaga
--- Переход к определению/реализации с предпросмотром
-vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
-vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
-vim.keymap.set("n", "gi", "<cmd>Lspsaga goto_implementation<CR>")
-vim.keymap.set("n", "gr", "<cmd>Lspsaga finder<CR>") -- Находит все ссылки
--- Навигация по диагностическим сообщениям
-vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
--- Показать структуру текущего файла
-vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>") -- Переименование символа с предпросмотром изменений
-vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
--- Переименование с поддержкой нескольких файлов
-vim.keymap.set("n", "<leader>rN", "<cmd>Lspsaga rename ++project<CR>")
--- Показывает кто вызывает/вызывается текущей функцией
-vim.keymap.set("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-vim.keymap.set("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+
 
 
 
@@ -97,10 +81,33 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end)
 
+
+
+-- buffer navigation
+vim.keymap.set('n', '<A-,>', '<Cmd>BufferPrevious<CR>', { desc = "Previous buffer" })
+vim.keymap.set('n', '<A-.>', '<Cmd>BufferNext<CR>', { desc = "Next buffer" })
+vim.keymap.set('n', '<A-c>', '<Cmd>BufferClose<CR>', { desc = "Close buffer" })
+
+
+
+-- Common LSP keymaps
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show hover information" })
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
+vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { desc = "Show signature help" })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" })
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Show references" })
+
+
+-- lspsaga
+-- Переход к определению/реализации с предпросмотром
+vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
+vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
+-- Показывает кто вызывает/вызывается текущей функцией
+vim.keymap.set("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+vim.keymap.set("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
 
 --snipet

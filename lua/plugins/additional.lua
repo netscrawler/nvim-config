@@ -11,10 +11,6 @@ return {
                 auto_hide = true,
                 tabpages = true,
             })
-
-            vim.keymap.set('n', '<A-,>', '<Cmd>BufferPrevious<CR>', { desc = "Previous buffer" })
-            vim.keymap.set('n', '<A-.>', '<Cmd>BufferNext<CR>', { desc = "Next buffer" })
-            vim.keymap.set('n', '<A-c>', '<Cmd>BufferClose<CR>', { desc = "Close buffer" })
         end,
     },
     {
