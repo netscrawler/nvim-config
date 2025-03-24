@@ -2,6 +2,7 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', "SmiteshP/nvim-navic" },
     config = function()
+        local navic = require("nvim-navic")
         require('lualine').setup {
             opts = function(_, opts)
                 local trouble = require("trouble")
@@ -55,19 +56,9 @@ return {
                 lualine_y = {},
                 lualine_z = {}
             },
-            tabline = {
-            },
-            winbar = {
-                lualine_c = {
-                    {
-                        "navic",
-                        color_correction = nil,
-                        navic_opts = nil
-                    }
-                }
-            },
-            inactive_winbar = {},
+            winbar = {},
             extensions = { 'fugitive', 'fzf', 'lazy', 'mason', 'nerdtree', 'quickfix', 'symbols-outline', 'toggleterm', 'trouble' }
         }
+        vim.opt.showmode = false
     end
 }

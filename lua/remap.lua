@@ -20,6 +20,30 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 
+-- lspsaga
+-- Переход к определению/реализации с предпросмотром
+vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
+vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
+vim.keymap.set("n", "gi", "<cmd>Lspsaga goto_implementation<CR>")
+vim.keymap.set("n", "gr", "<cmd>Lspsaga finder<CR>") -- Находит все ссылки
+-- Навигация по диагностическим сообщениям
+vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+-- Показать структуру текущего файла
+vim.keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>") -- Переименование символа с предпросмотром изменений
+vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
+-- Переименование с поддержкой нескольких файлов
+vim.keymap.set("n", "<leader>rN", "<cmd>Lspsaga rename ++project<CR>")
+-- Показывает кто вызывает/вызывается текущей функцией
+vim.keymap.set("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+vim.keymap.set("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+
+
+
+
+
+
+
 
 vim.keymap.set("n", "<leader>tf", "<cmd>TodoTelescope<CR>", { desc = "Найти TODO заметки с помощью Telescope" })
 

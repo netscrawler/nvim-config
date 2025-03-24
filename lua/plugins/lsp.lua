@@ -39,6 +39,14 @@ return {
             "kndndrj/nvim-dbee",
             "antosha417/nvim-lsp-file-operations",
             -- "Exafunction/codeium.nvim", -- Commented out AI assistant
+            {
+                "MattiasMTS/cmp-dbee",
+                dependencies = {
+                    { "kndndrj/nvim-dbee" }
+                },
+                ft = "sql", -- optional but good to have
+                opts = {},  -- needed
+            },
         },
         config = function()
             -- Set up Mason for LSP server management
@@ -173,7 +181,12 @@ return {
                             emptyFields = true,
                         },
                         codelens = { run = true, generate = true, test = true },
+                        linksInHover = true,
+                        semanticTokens = true,
+                        experimentalWorkspaceModule = true,
                         experimentalPostfixCompletions = true,
+
+                        completeUnexported = true,
                         completionProvider = {
                             triggerCharacters = { ".", ":", "/", " " }
                         }

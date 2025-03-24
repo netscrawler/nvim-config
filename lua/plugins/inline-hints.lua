@@ -33,6 +33,10 @@ return {
                     show = true,
                     highlight = "InlayHints",
                 },
+                interface = {
+                    show = true,
+                    highlight = "InlayHints"
+                }
             },
             -- Настройки для inline отображения
             inline = {
