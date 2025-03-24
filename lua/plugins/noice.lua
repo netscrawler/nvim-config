@@ -3,27 +3,27 @@ return {
     event = "VeryLazy",
     dependencies = {
         "MunifTanjim/nui.nvim",
-        {
-            "rcarriga/nvim-notify",
-            config = function()
-                require("notify").setup({
-                    background_colour = "#000000",
-                    fps = 60,
-                    icons = {
-                        DEBUG = "",
-                        ERROR = "",
-                        INFO = "",
-                        WARN = ""
-                    },
-                    level = 2,
-                    minimum_width = 50,
-                    render = "default",
-                    stages = "fade_in_slide_out",
-                    timeout = 3000,
-                    top_down = true
-                })
-            end,
-        },
+        -- {
+        --     "rcarriga/nvim-notify",
+        --     config = function()
+        --         require("notify").setup({
+        --             background_colour = "#000000",
+        --             fps = 60,
+        --             icons = {
+        --                 DEBUG = "",
+        --                 ERROR = "",
+        --                 INFO = "",
+        --                 WARN = ""
+        --             },
+        --             level = 2,
+        --             minimum_width = 50,
+        --             render = "default",
+        --             stages = "fade_in_slide_out",
+        --             timeout = 3000,
+        --             top_down = true
+        --         })
+        --     end,
+        -- },
     },
     config = function()
         require("noice").setup({
