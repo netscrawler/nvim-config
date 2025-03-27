@@ -4,6 +4,7 @@ return {
         dependencies = {
             "mfussenegger/nvim-dap",
         },
+        lazy = true,
         ft = "go",
         config = function()
             require("dap-go").setup()

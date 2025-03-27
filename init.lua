@@ -2,7 +2,7 @@ require("config.lazy")
 require("set")
 require("remap")
 
-
+vim.cmd.colorscheme "catppuccin"
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
 
@@ -11,17 +11,17 @@ local yank_group = augroup('HighlightYank', {})
 
 
 -- Автоматическое форматирование и сортировка импортов при сохранении файла
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        -- Выполнение форматирования кода через LSP
-        vim.lsp.buf.format({ async = false })
-        -- Если вы используете Go:
-        if vim.bo.filetype == "go" then
-            vim.cmd("silent! :GoImport")
-        end
-    end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     pattern = "*",
+--     callback = function()
+--         -- Выполнение форматирования кода через LSP
+--         vim.lsp.buf.format({ async = false })
+--         -- Если вы используете Go:
+--         if vim.bo.filetype == "go" then
+--             vim.cmd("silent! :GoImport")
+--         end
+--     end,
+-- })
 
 
 

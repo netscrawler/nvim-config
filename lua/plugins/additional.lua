@@ -1,19 +1,5 @@
 return {
     {
-        "romgrk/barbar.nvim",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            "lewis6991/gitsigns.nvim",
-        },
-        config = function()
-            require("barbar").setup({
-                animation = true,
-                auto_hide = true,
-                tabpages = true,
-            })
-        end,
-    },
-    {
         "kdheepak/lazygit.nvim",
         -- Команда для запуска
         cmd = {

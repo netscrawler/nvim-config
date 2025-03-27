@@ -7,10 +7,8 @@ return {
     config = function()
         local catppuccin = require("catppuccin")
         catppuccin.setup({
-            flavour = "mocha", -- latte, frappe, macchiato, mocha
-            background = {     -- :h background
-                light = "latte",
-                dark = "mocha",
+            flavour = "mocha",             -- latte, frappe, macchiato, mocha
+            background = {                 -- :h background
             },
             transparent_background = true, -- Make the background transparent
             show_end_of_buffer = false,    -- Show the '~' characters after the end of buffers
@@ -44,10 +42,17 @@ return {
                 nvimtree = true,
                 telescope = true,
                 notify = true,
+                aerial = true,
+                neotest = true,
+                barbar = true,
                 mini = false,
                 diffview = true,
                 fzf = true,
                 mason = true,
+                snacks = {
+                    enabled = true,
+                    indent_scope_color = "mocha", -- catppuccin color (eg. `lavender`) Default: text
+                },
                 native_lsp = {
                     enabled = true,
                     virtual_text = {
@@ -75,12 +80,11 @@ return {
                 octo = true,
                 symbols_outline = true,
                 lsp_trouble = true,
-
+                illuminate = false,
                 -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#supported-plugins)
             },
         })
 
         -- Apply the catppuccin theme
-        vim.cmd.colorscheme "catppuccin"
     end,
 }

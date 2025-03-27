@@ -1,8 +1,21 @@
 return {
     {
         "folke/trouble.nvim",
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
-        cmd = "Trouble",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+
+        opts = {
+            modes = {
+                diagnostics = {
+                    preview = {
+                        type = "split",
+                        relative = "win",
+                        position = "right",
+                        size = 0.45,
+                    },
+                },
+            },
+        },
+        cmd = { "Trouble", "TroubleToggle" },
         keys = {
             {
                 "<leader>q",
@@ -21,7 +34,7 @@ return {
             },
             {
                 "<leader>ql",
-                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+                function() require("trouble").toggle("lsp", { focus = false, win = { position = "right" } }) end,
                 desc = "LSP Definitions / references / ... (Trouble)",
             },
             {

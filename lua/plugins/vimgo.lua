@@ -27,6 +27,7 @@ return {
             vim.g.go_highlight_generate_tags = 1
             vim.g.go_highlight_variable_declarations = 1
             vim.g.go_highlight_variable_assignments = 1
+            vim.g.go_snippet_engine = "automatic"
 
             -- Testing features (which are not covered by gopls)
             vim.g.go_test_timeout = '10s'

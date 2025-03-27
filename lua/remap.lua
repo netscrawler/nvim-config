@@ -20,15 +20,6 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 
-
-
-
-
-
-
-
-
-
 vim.keymap.set("n", "<leader>tf", "<cmd>TodoTelescope<CR>", { desc = "Найти TODO заметки с помощью Telescope" })
 
 vim.keymap.set('n', '<A-h>', '<C-w>h', { noremap = true, silent = true }) -- Влево
@@ -51,7 +42,7 @@ vim.keymap.set('n', '<leader>gis', ':Gitsigns stage_hunk<CR>', { noremap = true,
 vim.keymap.set('n', '<leader>gir', ':Gitsigns reset_hunk<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gip', ':Gitsigns preview_hunk<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gib', ':Gitsigns blame_line<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>gid', ':Gitsigns diffthis<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gid', ':vert rightbelow Gitsigns diffthis<CR>', { noremap = true, silent = true })
 
 -- Пример горячих клавиш для помощи по сигнатуре
 vim.api.nvim_set_keymap('n', '<leader>hs', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', { noremap = true, silent = true })
@@ -101,27 +92,27 @@ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" }
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Show references" })
 
 
--- lspsaga
--- Переход к определению/реализации с предпросмотром
-vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
-vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
--- Показывает кто вызывает/вызывается текущей функцией
-vim.keymap.set("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-vim.keymap.set("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+-- -- lspsaga
+-- -- Переход к определению/реализации с предпросмотром
+-- vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
+-- vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>")
+-- -- Показывает кто вызывает/вызывается текущей функцией
+-- vim.keymap.set("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+-- vim.keymap.set("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
 
---snipet
-local ls = require("luasnip")
-ls.filetype_extend("javascript", { "jsdoc" })
+-- --snipet
+-- local ls = require("luasnip")
+-- ls.filetype_extend("javascript", { "jsdoc" })
 
 --- TODO: What is expand?
-vim.keymap.set({ "i" }, "<C-s>e", function() ls.expand() end, { silent = true })
-
-vim.keymap.set({ "i", "s" }, "<C-s>;", function() ls.jump(1) end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-s>,", function() ls.jump(-1) end, { silent = true })
-
-vim.keymap.set({ "i", "s" }, "<C-E>", function()
-    if ls.choice_active() then
-        ls.change_choice(1)
-    end
-end, { silent = true })
+-- vim.keymap.set({ "i" }, "<C-s>e", function() ls.expand() end, { silent = true })
+--
+-- vim.keymap.set({ "i", "s" }, "<C-s>;", function() ls.jump(1) end, { silent = true })
+-- vim.keymap.set({ "i", "s" }, "<C-s>,", function() ls.jump(-1) end, { silent = true })
+--
+-- vim.keymap.set({ "i", "s" }, "<C-E>", function()
+--     if ls.choice_active() then
+--         ls.change_choice(1)
+--     end
+-- end, { silent = true })

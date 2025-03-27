@@ -4,6 +4,7 @@ return {
         'nvim-treesitter/nvim-treesitter', -- optional
         'nvim-tree/nvim-web-devicons',     -- optional
     },
+    lazy = true,
     config = function()
         require('lspsaga').setup({
             implement = {

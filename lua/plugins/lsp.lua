@@ -14,17 +14,17 @@ return {
             "uga-rosa/cmp-cmdline",
             "onsails/lspkind.nvim",
 
-            -- Snippet support
-            "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip",
-            'rafamadriz/friendly-snippets',
+            -- -- Snippet support
+            -- "L3MON4D3/LuaSnip",
+            -- "saadparwaiz1/cmp_luasnip",
+            -- 'rafamadriz/friendly-snippets',
 
             -- Formatting
             "stevearc/conform.nvim",
 
             -- Go-specific tools
             'maxandron/goplements.nvim',
-            "Snikimonkd/cmp-go-pkgs",
+            -- "Snikimonkd/cmp-go-pkgs",
 
             -- Additional completion sources
             'f3fora/cmp-spell',
@@ -85,10 +85,10 @@ return {
             local cmp = require("cmp")
             local cmp_lsp = require("cmp_nvim_lsp")
             local lspkind = require("lspkind")
-            local luasnip = require("luasnip")
+            -- local luasnip = require("luasnip")
 
             -- Load snippets from friendly-snippets
-            require("luasnip.loaders.from_vscode").lazy_load()
+            -- require("luasnip.loaders.from_vscode").lazy_load()
 
             -- Enhanced capabilities for LSP
             local capabilities = vim.tbl_deep_extend(
@@ -180,7 +180,6 @@ return {
                             parameterType = true,
                             emptyFields = true,
                         },
-                        codelens = { run = true, generate = true, test = true },
                         linksInHover = true,
                         semanticTokens = true,
                         experimentalWorkspaceModule = true,
@@ -188,7 +187,7 @@ return {
 
                         completeUnexported = true,
                         completionProvider = {
-                            triggerCharacters = { ".", ":", "/", " " }
+                            triggerCharacters = { ".", ":", "/", " ", "(", "*", "&" }
                         }
                     },
                 }
@@ -247,40 +246,22 @@ return {
 
             -- Set up nvim-cmp
             cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                    end,
-                },
+                -- snippet = {
+                --     expand = function(args)
+                --         luasnip.lsp_expand(args.body)
+                --     end,
+                -- },
                 mapping = cmp.mapping.preset.insert({
                     ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
                     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
                     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
                     ["<C-Space>"] = cmp.mapping.complete(),
-                    ['<Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
-                    ['<S-Tab>'] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { 'i', 's' }),
                 }),
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp',       priority = 1000 },
-                    { name = 'luasnip',        priority = 750 },
+                    -- { name = 'luasnip',        priority = 750 },
                     { name = 'goplements',     priority = 700 },
-                    { name = 'go_pkgs',        priority = 600 },
+                    -- { name = 'go_pkgs',        priority = 600 },
                     { name = 'path',           priority = 500 },
                     { name = 'buffer',         priority = 400 },
                     { name = 'git' },

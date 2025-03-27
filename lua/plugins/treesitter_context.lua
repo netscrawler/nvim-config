@@ -6,7 +6,7 @@ return {
         config = function()
             require('treesitter-context').setup {
                 enable = true,        -- включить или выключить плагин
-                max_lines = 15,       -- сколько строк контекста показывать
+                max_lines = 2,        -- сколько строк контекста показывать
                 trim_scope = 'inner', -- как обрезать контекст ('inner' или 'outer')
                 patterns = {          -- какие паттерны использовать для определения контекста
                     default = {

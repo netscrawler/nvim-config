@@ -10,6 +10,7 @@ return {
         "rcarriga/nvim-dap-ui",  -- UI for debugging
         "nvim-neotest/nvim-nio",
     },
+    lazy = true,
     config = function()
         local neotest = require("neotest")
 

@@ -1,6 +1,7 @@
 return {
     {
         "hedyhli/outline.nvim",
+        lazy = true,
         config = function()
             local opts = {
                 highlight_hovered_item = true,

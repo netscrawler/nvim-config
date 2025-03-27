@@ -9,6 +9,7 @@ return {
             "<leader>Du",
             "<leader>DU",
         },
+        lazy = true,
         config = function()
             print("dap")
             local dapui = require("dapui")

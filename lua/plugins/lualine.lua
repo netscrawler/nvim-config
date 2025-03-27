@@ -2,7 +2,8 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', "SmiteshP/nvim-navic" },
     config = function()
-        local navic = require("nvim-navic")
+        -- local navic = require("nvim-navic")
+        -- local tabln = require 'tabline'
         require('lualine').setup {
             opts = function(_, opts)
                 local trouble = require("trouble")
@@ -23,17 +24,18 @@ return {
             end,
             options = {
                 icons_enabled = true,
-                theme = 'auto',
+                theme = "auto",
                 component_separators = '',
                 section_separators = '',
                 disabled_filetypes = {
                     statusline = {},
+                    tabline = { 'filesystem' },
                     winbar = {},
                 },
-                ignore_focus = {},
+                ignore_focus = { 'neo-tree', 'telescope', 'sidebar' },
                 always_divide_middle = true,
                 always_show_tabline = true,
-                globalstatus = false,
+                globalstatus = true,
                 refresh = {
                     statusline = 100,
                     tabline = 100,
@@ -43,7 +45,7 @@ return {
             sections = {
                 lualine_a = { 'mode' },
                 lualine_b = { 'branch', 'diff', 'diagnostics' },
-                lualine_c = { 'filename' },
+                lualine_c = { 'filename', 'trouble' },
                 lualine_x = { 'encoding', 'fileformat', 'filetype' },
                 lualine_y = { 'progress' },
                 lualine_z = { 'location' }
@@ -56,8 +58,17 @@ return {
                 lualine_y = {},
                 lualine_z = {}
             },
-            winbar = {},
-            extensions = { 'fugitive', 'fzf', 'lazy', 'mason', 'nerdtree', 'quickfix', 'symbols-outline', 'toggleterm', 'trouble' }
+            tabline = {
+                -- lualine_a = {},
+                -- lualine_b = {},
+                -- lualine_c = { 'buffers' },
+                -- lualine_x = {},
+                -- lualine_y = {},
+                -- lualine_z = { 'tabs' },
+            },
+            winbar = {
+            },
+            extensions = { 'fugitive', 'fzf', 'lazy', 'mason', 'nerdtree', 'quickfix', 'symbols-outline', 'toggleterm', 'trouble', 'aerial', 'neo-tree', 'nvim-dap-ui' }
         }
         vim.opt.showmode = false
     end

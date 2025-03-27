@@ -20,16 +20,6 @@ return {
         end,
     },
 
-    -- Индикация отступов (как в GoLand/VSCode)
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        opts = {
-            indent = { char = "│" },
-            scope = { enabled = true },
-        },
-    },
-
     -- Вкладки вверху (winbar) с путями (как в GoLand)
     {
         "utilyre/barbecue.nvim",
