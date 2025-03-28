@@ -59,6 +59,7 @@ return {
                     "cssls",
                     "cssmodules_ls",
                     "emmet_ls"
+                    -- "golangci_lint_ls"
                 },
             })
 
@@ -136,6 +137,25 @@ return {
                     }
                 }
             })
+            -- lspconfig.golangci_lint_ls.setup({
+            --     capabilities = capabilities,
+            --     root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
+            --     filetypes = { "go" },
+            --     init_options = {
+            --         command = { "golangci-lint", "run", "--out-format", "json" },
+            --     },
+            -- })
+            -- setup_server("golangci_lint_ls", {
+            --
+            --     settings = {
+            --         root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
+            --         filetypes = { "go" },
+            --         init_options = {
+            --             command = { "golangci-lint", "run", "--out-format", "json" },
+            --         },
+            --     }
+            --
+            -- })
 
             setup_server("gopls", {
                 settings = {
@@ -382,7 +402,7 @@ return {
 
                 -- Key mappings for Go development
                 vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
-                vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, { desc = 'Code actions' })
+                -- vim.keymap.set('n', '<leader>cA', function() vim.lsp.buf.code_action() end, { desc = 'Code actions' })
                 vim.keymap.set('n', '<leader>rt', ':GoAddTags<CR>', { desc = 'Add tags' })
                 vim.keymap.set('n', '<leader>rT', ':GoRemoveTags<CR>', { desc = 'Remove tags' })
                 vim.keymap.set('n', '<leader>re', ':GoIfErr<CR>', { desc = 'Add if err' })

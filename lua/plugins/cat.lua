@@ -8,6 +8,7 @@ return {
         local catppuccin = require("catppuccin")
         catppuccin.setup({
             flavour = "mocha",             -- latte, frappe, macchiato, mocha
+
             background = {                 -- :h background
             },
             transparent_background = true, -- Make the background transparent
@@ -35,7 +36,22 @@ return {
                 operators = {},
             },
             color_overrides = {},
-            custom_highlights = {},
+            custom_highlights = function()
+                local C = require("catppuccin.palettes").get_palette()
+                return {
+                    GitGraphHash = { fg = C.mauve },
+                    GitGraphTimestamp = { fg = C.lavender },
+                    GitGraphAuthor = { fg = C.flamingo },
+                    GitGraphBranchName = { fg = C.teal },
+                    GitGraphBranchTag = { fg = C.pink },
+                    GitGraphBranchMsg = { fg = C.overlay2 },
+                    GitGraphBranch1 = { fg = C.yellow },
+                    GitGraphBranch2 = { fg = C.pink },
+                    GitGraphBranch3 = { fg = C.sky },
+                    GitGraphBranch4 = { fg = C.green },
+                    GitGraphBranch5 = { fg = C.red },
+                }
+            end,
             integrations = {
                 cmp = true,
                 gitsigns = true,

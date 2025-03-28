@@ -4,7 +4,7 @@ return {
         'nvim-treesitter/nvim-treesitter', -- optional
         'nvim-tree/nvim-web-devicons',     -- optional
     },
-    lazy = true,
+    lazy = false,
     config = function()
         require('lspsaga').setup({
             implement = {
@@ -18,6 +18,13 @@ return {
             symbol_in_winbar = {
                 enable = false,
             },
+            outline = {
+                -- layout = 'float'
+                win_width = 40
+            },
+            code_action = {
+                enabled = true
+            }
 
 
         })

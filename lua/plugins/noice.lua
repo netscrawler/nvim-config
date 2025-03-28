@@ -92,6 +92,13 @@ return {
                     opts = {},
                 },
 
+                code_action = {
+                    enabled = true,
+                    view = "popupmenu", -- Выводим code actions в отдельное всплывающее окно
+                    opts = {
+                        border = { style = "rounded", padding = { 1, 1 } },
+                    },
+                },
                 documentation = {
                     view = "hover",
                     opts = {

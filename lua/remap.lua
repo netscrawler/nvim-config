@@ -76,9 +76,9 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 
 -- buffer navigation
-vim.keymap.set('n', '<A-,>', '<Cmd>BufferPrevious<CR>', { desc = "Previous buffer" })
-vim.keymap.set('n', '<A-.>', '<Cmd>BufferNext<CR>', { desc = "Next buffer" })
-vim.keymap.set('n', '<A-c>', '<Cmd>BufferClose<CR>', { desc = "Close buffer" })
+-- vim.keymap.set('n', '<A-,>', '<Cmd>BufferPrevious<CR>', { desc = "Previous buffer" })
+-- vim.keymap.set('n', '<A-.>', '<Cmd>BufferNext<CR>', { desc = "Next buffer" })
+-- vim.keymap.set('n', '<A-c>', '<Cmd>BufferClose<CR>', { desc = "Close buffer" })
 
 
 
@@ -88,10 +88,13 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show hover information" })
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "Go to implementation" })
 vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { desc = "Show signature help" })
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" })
+-- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "Rename symbol" })
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Show references" })
 
+vim.keymap.set('n', '<leader>no', '<cmd>Lspsaga outline<CR>', { desc = 'outline' })
+vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename ++project<CR>', { desc = 'rename' })
 
+vim.keymap.set('n', '<leader>ca', "<cmd>Lspsaga code_action<CR>", { desc = 'Code actions' })
 -- -- lspsaga
 -- -- Переход к определению/реализации с предпросмотром
 -- vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>")
