@@ -94,7 +94,7 @@ vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "Show references" })
 vim.keymap.set('n', '<leader>no', '<cmd>Lspsaga outline<CR>', { desc = 'outline' })
 vim.keymap.set('n', '<leader>rn', '<cmd>Lspsaga rename ++project<CR>', { desc = 'rename' })
 
-vim.keymap.set('n', '<leader>ca', "<cmd>Lspsaga code_action<CR>", { desc = 'Code actions' })
+-- vim.keymap.set('n', '<leader>ca', '<cmd>Lspsaga code_action<CR>', { desc = 'Code actions' })
 -- -- lspsaga
 -- -- Переход к определению/реализации с предпросмотром
 -- vim.keymap.set("n", "gp", "<cmd>Lspsaga peek_definition<CR>")

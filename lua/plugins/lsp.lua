@@ -58,15 +58,15 @@ return {
                     "html",
                     "cssls",
                     "cssmodules_ls",
-                    "emmet_ls"
-                    -- "golangci_lint_ls"
+                    "emmet_ls",
+                    "golangci_lint_ls"
                 },
             })
 
             -- Set up Conform for formatting
             require("conform").setup({
                 formatters_by_ft = {
-                    go = { "goimports", "gofumpt", "golines" },
+                    go = { "goimports", "gofumpt", "golines", "golangci_lint" },
                     lua = { "stylua" },
                     javascript = { "prettier" },
                     typescript = { "prettier" },
@@ -137,14 +137,15 @@ return {
                     }
                 }
             })
-            -- lspconfig.golangci_lint_ls.setup({
-            --     capabilities = capabilities,
-            --     root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
-            --     filetypes = { "go" },
-            --     init_options = {
-            --         command = { "golangci-lint", "run", "--out-format", "json" },
-            --     },
-            -- })
+            lspconfig.golangci_lint_ls.setup({
+                cmd = { "golangci-lint-langserver" },
+                capabilities = capabilities,
+                root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
+                filetypes = { "go" },
+                init_options = {
+                    command = { "golangci-lint", "run", "--out-format", "json" },
+                },
+            })
             -- setup_server("golangci_lint_ls", {
             --
             --     settings = {
@@ -237,32 +238,141 @@ return {
             })
 
             -- Set up diagnostic signs
-            local signs = {
-                Error = "✘",
-                Warn = "▲",
-                Info = "ℹ",
-                Hint = "⚑"
+            -- local signs = {
+            --     Error = "✘",
+            --     Warn = "▲",
+            --     Info = "ℹ",
+            --     Hint = "⚑"
+            -- }
+
+            -- -- Настройка диагностики
+            -- vim.diagnostic.config({
+            --     -- update_in_insert = true,
+            --     virtual_text = true,
+            --     -- signs = {
+            --     --     active = {
+            --     --         { name = "DiagnosticSignError", text = signs.Error },
+            --     --         { name = "DiagnosticSignWarn",  text = signs.Warn },
+            --     --         { name = "DiagnosticSignInfo",  text = signs.Info },
+            --     --         { name = "DiagnosticSignHint",  text = signs.Hint }
+            --     --     }
+            --     -- },
+            --     -- float = {
+            --     --     focusable = false,
+            --     --     style = "minimal",
+            --     --     border = "rounded",
+            --     --     source = "always",
+            --     --     header = "",
+            --     --     prefix = "",
+            --     -- },
+            -- })
+            --
+            --
+            local diagnostic_signs = {
+                [vim.diagnostic.severity.ERROR] = "",
+                [vim.diagnostic.severity.WARN] = "",
+                [vim.diagnostic.severity.INFO] = "",
+                [vim.diagnostic.severity.HINT] = "󰌵",
             }
 
-            for type, icon in pairs(signs) do
-                local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, { text = icon, texthl = hl })
+            local shorter_source_names = {
+                ["Lua Diagnostics."] = "Lua",
+                ["Lua Syntax Check."] = "Lua",
+            }
+
+            local function diagnostic_format(diagnostic)
+                return string.format(
+                    "%s %s (%s): %s",
+                    diagnostic_signs[diagnostic.severity],
+                    shorter_source_names[diagnostic.source] or diagnostic.source,
+                    diagnostic.code,
+                    diagnostic.message
+                )
             end
 
-            -- Configure diagnostics
             vim.diagnostic.config({
-                update_in_insert = true,
-                virtual_text = { source = "always" },
-                signs = true,
-                float = {
-                    focusable = false,
-                    style = "minimal",
-                    border = "rounded",
-                    source = "always",
-                    header = "",
+                virtual_text = {
+                    spacing = 10,
                     prefix = "",
+                    format = diagnostic_format,
                 },
+                signs = {
+                    text = diagnostic_signs,
+                },
+                -- virtual_lines = {
+                --     current_line = true,
+                --     format = diagnostic_format_virt,
+                -- },
+                underline = true,
+                severity_sort = false,
             })
+
+
+
+            --
+            -- -- Добавьте в ваш конфиг (обычно в раздел с диагностикой)
+            -- vim.diagnostic.config({
+            --     -- Основные настройки
+            --     virtual_text = {
+            --         format = function(diagnostic)
+            --             local icons = {
+            --                 Error = " ",
+            --                 Warn = " ",
+            --                 Info = " ",
+            --                 Hint = " ",
+            --             }
+            --             return string.format(
+            --                 "%s %s [%s]",
+            --                 icons[diagnostic.severity],
+            --                 diagnostic.message,
+            --                 diagnostic.source
+            --             )
+            --         end,
+            --         severity = { min = vim.diagnostic.severity.HINT }, -- Показывать все уровни
+            --         spacing = 4,
+            --         prefix = "",                                       -- Убрать префикс
+            --         overlap = false,                                   -- Разрешить перекрытие сообщений
+            --         hl_mode = "combine",
+            --     },
+            --
+            --     -- Новые возможности 0.11
+            --     float = {
+            --         border = "rounded",
+            --         max_width = 80,
+            --         max_height = 20,
+            --         header = { "Тип:", "Сообщение", "Источник" },
+            --         format = function(diagnostic)
+            --             return string.format(
+            --                 "%s: %s [%s]",
+            --                 diagnostic.severity,
+            --                 diagnostic.message,
+            --                 diagnostic.source
+            --             )
+            --         end
+            --     },
+            --
+            --     -- Показывать все диагностики в стеке
+            --     severity_sort = false,
+            --     update_in_insert = false,
+            --     underline = {
+            --         severity = { min = vim.diagnostic.severity.INFO }
+            --     },
+            --
+            --     -- Новый тип отображения в 0.11
+            --     virtual_lines = {
+            --         current_line = true, -- Показывать для всех строк
+            --         highlight_whole_line = true,
+            --         format = function(diagnostic)
+            --             return string.format(
+            --                 " 󰉺 %s: %s ",
+            --                 diagnostic.source,
+            --                 diagnostic.message
+            --             )
+            --         end
+            --     }
+            -- })
+
+
 
             -- Set up nvim-cmp
             cmp.setup({
@@ -279,6 +389,7 @@ return {
                 }),
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp',       priority = 1000 },
+                    { name = 'copilot',        priority = 750 },
                     -- { name = 'luasnip',        priority = 750 },
                     { name = 'goplements',     priority = 700 },
                     -- { name = 'go_pkgs',        priority = 600 },

@@ -49,15 +49,15 @@ return {
             -- Alternate between implementation and test
             map('n', '<leader>ga', '<cmd>GoAlternate<CR>', 'Go to Alternate File')
 
-            -- Set Go-specific options
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = "go",
-                callback = function()
-                    vim.opt_local.expandtab = false -- Use tabs not spaces
-                    vim.opt_local.tabstop = 4
-                    vim.opt_local.shiftwidth = 4
-                end,
-            })
+            -- -- Set Go-specific options
+            -- vim.api.nvim_create_autocmd("FileType", {
+            --     pattern = "go",
+            --     callback = function()
+            --         vim.opt_local.expandtab = false -- Use tabs not spaces
+            --         vim.opt_local.tabstop = 4
+            --         vim.opt_local.shiftwidth = 4
+            --     end,
+            -- })
         end,
     },
     {

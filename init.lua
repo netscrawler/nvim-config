@@ -10,7 +10,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
 
 
--- Автоматическое форматирование и сортировка импортов при сохранении файла
+-- -- Автоматическое форматирование и сортировка импортов при сохранении файла
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --     pattern = "*",
 --     callback = function()
@@ -36,22 +36,22 @@ vim.filetype.add({
     }
 })
 
-autocmd('TextYankPost', {
-    group = yank_group,
-    pattern = '*',
-    callback = function()
-        vim.highlight.on_yank({
-            higroup = 'IncSearch',
-            timeout = 40,
-        })
-    end,
-})
+-- autocmd('TextYankPost', {
+--     group = yank_group,
+--     pattern = '*',
+--     callback = function()
+--         vim.highlight.on_yank({
+--             higroup = 'IncSearch',
+--             timeout = 40,
+--         })
+--     end,
+-- })
 
-autocmd({ "BufWritePre" }, {
-    group = ThePrimeagenGroup,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
-})
+-- autocmd({ "BufWritePre" }, {
+--     group = ThePrimeagenGroup,
+--     pattern = "*",
+--     command = [[%s/\s\+$//e]],
+-- })
 
 
 
