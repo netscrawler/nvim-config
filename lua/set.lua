@@ -14,7 +14,7 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 -- Включите поддержку True Color
 vim.o.encoding = "utf-8"
