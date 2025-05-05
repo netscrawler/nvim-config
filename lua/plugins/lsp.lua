@@ -15,9 +15,9 @@ return {
 			"onsails/lspkind.nvim",
 
 			-- -- Snippet support
-			-- "L3MON4D3/LuaSnip",
-			-- "saadparwaiz1/cmp_luasnip",
-			-- 'rafamadriz/friendly-snippets',
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"rafamadriz/friendly-snippets",
 
 			-- Formatting
 			"stevearc/conform.nvim",
@@ -59,7 +59,7 @@ return {
 					"cssls",
 					"cssmodules_ls",
 					"emmet_ls",
-					-- "golangci_lint_ls"
+					-- "golangci_lint_ls",
 				},
 			})
 
@@ -89,10 +89,10 @@ return {
 			local cmp = require("cmp")
 			local cmp_lsp = require("cmp_nvim_lsp")
 			local lspkind = require("lspkind")
-			-- local luasnip = require("luasnip")
+			local luasnip = require("luasnip")
 
 			-- Load snippets from friendly-snippets
-			-- require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load()
 
 			-- Enhanced capabilities for LSP
 			local capabilities = vim.tbl_deep_extend(
@@ -142,53 +142,23 @@ return {
 			})
 			-- setup_server("superhtml")
 			-- setup_server("buf")
+			setup_server("htmx")
+			-- setup_server("copilot_language_server")
 			setup_server("dockerls")
+			setup_server("protols")
 			setup_server("docker_compose_language_service")
 			lspconfig.templ.setup({})
 
-			-- local configs = require 'lspconfig/configs'
-			--
-			-- if not configs.golangcilsp then
-			--     configs.golangcilsp = {
-			--         default_config = {
-			--             cmd = { 'golangci-lint-langserver' },
-			--             root_dir = lspconfig.util.root_pattern('go.mod'),
-			--             init_options = {
-			--                 command = { "golangci-lint", "run", "--output.json.stderr" },
-			--             }
-			--         },
-			--     }
-			-- end
-			-- lspconfig.golangci_lint_ls.setup {
-			--     filetypes = { 'go', 'gomod' }
-			-- }
 			-- lspconfig.golangci_lint_ls.setup({
 			-- 	cmd = { "golangci-lint-langserver" },
-			-- 	-- capabilities = capabilities,
+			-- 	filetypes = { "go", "gomod" },
 			-- 	root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
-			-- 	filetypes = { "go" },
-			-- 	-- init_options = {
-			-- 	--     command = { "golangci-lint", "run", "--output.json.path", "stdout" },
-			-- 	-- },
+			-- 	settings = {},
+			-- 	single_file_support = true, -- ограничить области действия
 			-- })
-			-- setup_server("golangci_lint_ls", {
-			--
-			--     settings = {
-			--         root_dir = lspconfig.util.root_pattern(".git", "go.mod"),
-			--         filetypes = { "go" },
-			--         -- init_options = {
-			--         --     command = { "golangci-lint", "run", "--out-format", "json" },
-			--         -- },
-			--     }
-			--
-			-- })
-			lspconfig.golangci_lint_ls.setup({
-				cmd = { "golangci-lint-langserver" },
-				filetypes = { "go", "gomod" },
-				root_dir = lspconfig.util.root_pattern("go.mod", ".git"),
-				settings = {},
-				-- single_file_support = true, -- ограничить области действия
-			})
+
+			setup_server("ts_ls")
+			setup_server("eslint")
 
 			setup_server("gopls", {
 				settings = {
@@ -307,11 +277,11 @@ return {
 				[vim.diagnostic.severity.HINT] = "󰌵",
 			}
 
-			-- local shorter_source_names = {
-			--     ["Lua Diagnostics."] = "Lua",
-			--     ["Lua Syntax Check."] = "Lua",
-			--     -- ["golangci_lint_ls."] = "golint",
-			-- }
+			local shorter_source_names = {
+				["Lua Diagnostics."] = "Lua",
+				["Lua Syntax Check."] = "Lua",
+				-- ["golangci_lint_ls."] = "golint",
+			}
 
 			local function diagnostic_format(diagnostic)
 				return string.format(
@@ -405,11 +375,11 @@ return {
 
 			-- Set up nvim-cmp
 			cmp.setup({
-				-- snippet = {
-				--     expand = function(args)
-				--         luasnip.lsp_expand(args.body)
-				--     end,
-				-- },
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
@@ -420,7 +390,7 @@ return {
 					{ name = "nvim_lsp", priority = 1000 },
 
 					-- { name = 'codeium',        priority = 750 },
-					-- { name = 'luasnip',        priority = 750 },
+					{ name = "luasnip", priority = 750 },
 					{ name = "goplements", priority = 700 },
 					-- { name = 'go_pkgs',        priority = 600 },
 					{ name = "path", priority = 500 },
