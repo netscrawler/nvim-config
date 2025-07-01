@@ -12,8 +12,19 @@ return {
 				sign = false,
 				virtual_text = false,
 			},
+			definition = {
+				keys = {
+					edit = "o",
+				},
+			},
 			lightbulb = {
 				enable = false,
+			},
+			finder = {
+				max_height = 0.6,
+				keys = {
+					vsplit = "v",
+				},
 			},
 			symbol_in_winbar = {
 				enable = false,
@@ -23,6 +34,8 @@ return {
 				win_width = 40,
 			},
 			code_action = {
+				show_server_name = true,
+				extend_gitsigns = true,
 				enabled = true,
 			},
 		})

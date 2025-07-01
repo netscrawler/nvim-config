@@ -24,8 +24,8 @@ return {
 			styles = { -- The styles that are applied to different syntax groups
 				comments = { "italic" },
 				conditionals = { "italic" },
-				loops = {},
-				functions = {},
+				loops = { "bold" },
+				functions = { "italic" },
 				keywords = {},
 				strings = {},
 				variables = {},

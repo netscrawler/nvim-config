@@ -59,8 +59,10 @@ return {
 					"cssls",
 					"cssmodules_ls",
 					"emmet_ls",
+					"rust_analyzer",
 					-- "golangci_lint_ls",
 				},
+				automatic_installation = true,
 			})
 
 			-- Set up Conform for formatting
@@ -75,7 +77,7 @@ return {
 					css = { "prettier" },
 					json = { "prettier" },
 					yaml = { "prettier" },
-					markdown = { "prettier" },
+					-- markdown = { "prettier" },
 					shell = { "beautysh" },
 					proto = { "buf" },
 				},
@@ -98,7 +100,8 @@ return {
 			local capabilities = vim.tbl_deep_extend(
 				"force",
 				vim.lsp.protocol.make_client_capabilities(),
-				cmp_lsp.default_capabilities()
+				cmp_lsp.default_capabilities(),
+				require("lsp-file-operations").default_capabilities()
 			)
 
 			-- Add advanced capabilities
@@ -142,9 +145,40 @@ return {
 			})
 			-- setup_server("superhtml")
 			-- setup_server("buf")
-			setup_server("htmx")
+			-- setup_server("htmx")
+			-- setup_server("asm_lsp")
+			setup_server("air")
+			-- setup_server("postgres_lsp")
+			-- setup_server("sqlls")
+			setup_server("volar")
+			setup_server("bashls")
+
+			-- setup_server("clangd")
+			setup_server("pyright")
+			-- setup_server("phpactor")
+			-- setup_server("rust_analyzer", {
+			-- 	checkOnSave = {
+			-- 		command = "clippy", -- ОБЯЗАТЕЛЬНО
+			-- 		extraArgs = { "--no-deps" },
+			-- 	},
+			-- 	cargo = {
+			-- 		allFeatures = true,
+			-- 	},
+			-- 	procMacro = {
+			-- 		enable = true,
+			-- 	},
+			-- 	lens = {
+			-- 		enable = true,
+			-- 	},
+			-- 	inlayHints = {
+			-- 		chainingHints = true,
+			-- 		parameterHints = true,
+			-- 		typeHints = true,
+			-- 	},
+			-- })
 			-- setup_server("copilot_language_server")
 			setup_server("dockerls")
+
 			setup_server("protols")
 			setup_server("docker_compose_language_service")
 			lspconfig.templ.setup({})
@@ -159,6 +193,8 @@ return {
 
 			setup_server("ts_ls")
 			setup_server("eslint")
+			-- setup_server("xmlformatter", {})
+			setup_server("lemminx")
 
 			setup_server("gopls", {
 				settings = {
@@ -177,18 +213,16 @@ return {
 							unusedvariable = true,
 							modernize = true,
 						},
-						staticcheck = true,
-						gofumpt = true,
-						directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
 						codelenses = {
 							gc_details = true,
 							generate = true,
 							regenerate_cgo = true,
 							run_govulncheck = true,
+							vulncheck = true,
 							test = true,
 							tidy = true,
 							upgrade_dependency = true,
-							vendor = true,
+							-- 	vendor = true,
 						},
 						hints = {
 							assignVariableTypes = true,
@@ -203,10 +237,14 @@ return {
 							parameterType = true,
 							emptyFields = true,
 						},
+						staticcheck = true,
+						gofumpt = true,
+						directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
 						linksInHover = true,
 						semanticTokens = true,
 						experimentalWorkspaceModule = true,
 						experimentalPostfixCompletions = true,
+						usePlaceholders = false,
 
 						completeUnexported = true,
 						completionProvider = {
@@ -239,48 +277,11 @@ return {
 				filetypes = { "html", "css", "scss", "less" },
 			})
 
-			-- Set up diagnostic signs
-			-- local signs = {
-			--     Error = "✘",
-			--     Warn = "▲",
-			--     Info = "ℹ",
-			--     Hint = "⚑"
-			-- }
-
-			-- -- Настройка диагностики
-			-- vim.diagnostic.config({
-			--     -- update_in_insert = true,
-			--     virtual_text = true,
-			--     -- signs = {
-			--     --     active = {
-			--     --         { name = "DiagnosticSignError", text = signs.Error },
-			--     --         { name = "DiagnosticSignWarn",  text = signs.Warn },
-			--     --         { name = "DiagnosticSignInfo",  text = signs.Info },
-			--     --         { name = "DiagnosticSignHint",  text = signs.Hint }
-			--     --     }
-			--     -- },
-			--     -- float = {
-			--     --     focusable = false,
-			--     --     style = "minimal",
-			--     --     border = "rounded",
-			--     --     source = "always",
-			--     --     header = "",
-			--     --     prefix = "",
-			--     -- },
-			-- })
-			--
-			--
 			local diagnostic_signs = {
 				[vim.diagnostic.severity.ERROR] = "",
 				[vim.diagnostic.severity.WARN] = "",
 				[vim.diagnostic.severity.INFO] = "",
 				[vim.diagnostic.severity.HINT] = "󰌵",
-			}
-
-			local shorter_source_names = {
-				["Lua Diagnostics."] = "Lua",
-				["Lua Syntax Check."] = "Lua",
-				-- ["golangci_lint_ls."] = "golint",
 			}
 
 			local function diagnostic_format(diagnostic)
@@ -303,75 +304,11 @@ return {
 					text = diagnostic_signs,
 				},
 				-- virtual_lines = {
-				--     current_line = true,
-				--     format = diagnostic_format_virt,
+				-- 	current_line = true,
 				-- },
 				underline = true,
 				severity_sort = false,
 			})
-
-			--
-			-- -- Добавьте в ваш конфиг (обычно в раздел с диагностикой)
-			-- vim.diagnostic.config({
-			--     -- Основные настройки
-			--     virtual_text = {
-			--         format = function(diagnostic)
-			--             local icons = {
-			--                 Error = " ",
-			--                 Warn = " ",
-			--                 Info = " ",
-			--                 Hint = " ",
-			--             }
-			--             return string.format(
-			--                 "%s %s [%s]",
-			--                 icons[diagnostic.severity],
-			--                 diagnostic.message,
-			--                 diagnostic.source
-			--             )
-			--         end,
-			--         severity = { min = vim.diagnostic.severity.HINT }, -- Показывать все уровни
-			--         spacing = 4,
-			--         prefix = "",                                       -- Убрать префикс
-			--         overlap = false,                                   -- Разрешить перекрытие сообщений
-			--         hl_mode = "combine",
-			--     },
-			--
-			--     -- Новые возможности 0.11
-			--     float = {
-			--         border = "rounded",
-			--         max_width = 80,
-			--         max_height = 20,
-			--         header = { "Тип:", "Сообщение", "Источник" },
-			--         format = function(diagnostic)
-			--             return string.format(
-			--                 "%s: %s [%s]",
-			--                 diagnostic.severity,
-			--                 diagnostic.message,
-			--                 diagnostic.source
-			--             )
-			--         end
-			--     },
-			--
-			--     -- Показывать все диагностики в стеке
-			--     severity_sort = false,
-			--     update_in_insert = false,
-			--     underline = {
-			--         severity = { min = vim.diagnostic.severity.INFO }
-			--     },
-			--
-			--     -- Новый тип отображения в 0.11
-			--     virtual_lines = {
-			--         current_line = true, -- Показывать для всех строк
-			--         highlight_whole_line = true,
-			--         format = function(diagnostic)
-			--             return string.format(
-			--                 " 󰉺 %s: %s ",
-			--                 diagnostic.source,
-			--                 diagnostic.message
-			--             )
-			--         end
-			--     }
-			-- })
 
 			-- Set up nvim-cmp
 			cmp.setup({
@@ -386,13 +323,15 @@ return {
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
 					["<C-Space>"] = cmp.mapping.complete(),
 				}),
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				},
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp", priority = 1000 },
-
-					-- { name = 'codeium',        priority = 750 },
 					{ name = "luasnip", priority = 750 },
 					{ name = "goplements", priority = 700 },
-					-- { name = 'go_pkgs',        priority = 600 },
+					{ name = "vim-go", priority = 600 },
 					{ name = "path", priority = 500 },
 					{ name = "buffer", priority = 400 },
 					{ name = "git" },
