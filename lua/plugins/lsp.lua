@@ -143,40 +143,13 @@ return {
 					},
 				},
 			})
-			-- setup_server("superhtml")
-			-- setup_server("buf")
-			-- setup_server("htmx")
-			-- setup_server("asm_lsp")
 			setup_server("air")
-			-- setup_server("postgres_lsp")
-			-- setup_server("sqlls")
+			setup_server("vacuum")
 			setup_server("volar")
 			setup_server("bashls")
 
-			-- setup_server("clangd")
+			setup_server("clangd")
 			setup_server("pyright")
-			-- setup_server("phpactor")
-			-- setup_server("rust_analyzer", {
-			-- 	checkOnSave = {
-			-- 		command = "clippy", -- ОБЯЗАТЕЛЬНО
-			-- 		extraArgs = { "--no-deps" },
-			-- 	},
-			-- 	cargo = {
-			-- 		allFeatures = true,
-			-- 	},
-			-- 	procMacro = {
-			-- 		enable = true,
-			-- 	},
-			-- 	lens = {
-			-- 		enable = true,
-			-- 	},
-			-- 	inlayHints = {
-			-- 		chainingHints = true,
-			-- 		parameterHints = true,
-			-- 		typeHints = true,
-			-- 	},
-			-- })
-			-- setup_server("copilot_language_server")
 			setup_server("dockerls")
 
 			setup_server("protols")
