@@ -51,11 +51,6 @@ return {
 				desc = "Buffer Diagnostics (Trouble)",
 			},
 			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
 				"<leader>ql",
 				function()
 					require("trouble").toggle("lsp", { focus = false, win = { position = "right" } })
